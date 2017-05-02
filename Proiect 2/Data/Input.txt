@@ -1,5 +1,0 @@
-1. A -> S : A,B, na
-2. S -> A : {msg2, na, B, kab, {msg3, A, kab}kbs}kas
-3. A -> B : {msg3, A, kab}kbs
-4. B -> A : {msg4, nb}kab
-5. A -> B : {msg5, nb}kab
