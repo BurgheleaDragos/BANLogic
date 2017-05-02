@@ -1,0 +1,9 @@
+C:\Users\User\Desktop\facultate\Modelarea protocoalelor de securitate\Proiect 2\Proiect 2\bin\Debug\Proiect 2.exe.config
+C:\Users\User\Desktop\facultate\Modelarea protocoalelor de securitate\Proiect 2\Proiect 2\bin\Debug\Proiect 2.exe
+C:\Users\User\Desktop\facultate\Modelarea protocoalelor de securitate\Proiect 2\Proiect 2\bin\Debug\Proiect 2.pdb
+C:\Users\User\Desktop\facultate\Modelarea protocoalelor de securitate\Proiect 2\Proiect 2\obj\Debug\Proiect 2.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\facultate\Modelarea protocoalelor de securitate\Proiect 2\Proiect 2\obj\Debug\Proiect_2.Form1.resources
+C:\Users\User\Desktop\facultate\Modelarea protocoalelor de securitate\Proiect 2\Proiect 2\obj\Debug\Proiect_2.Properties.Resources.resources
+C:\Users\User\Desktop\facultate\Modelarea protocoalelor de securitate\Proiect 2\Proiect 2\obj\Debug\Proiect 2.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\facultate\Modelarea protocoalelor de securitate\Proiect 2\Proiect 2\obj\Debug\Proiect 2.exe
+C:\Users\User\Desktop\facultate\Modelarea protocoalelor de securitate\Proiect 2\Proiect 2\obj\Debug\Proiect 2.pdb
