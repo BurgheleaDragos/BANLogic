@@ -28,7 +28,7 @@ namespace Proiect_2
         {
             textBoxRead.Text = reader.ReadData();
             //            reader.Data = textBoxRead.Text + "_test";
-            
+
             //            textBoxWrite.Text = reader.Data;
             reader.WriteData();
 
@@ -47,7 +47,7 @@ namespace Proiect_2
                 Name = "Agent_A"
             };
             //            step2.Formula = new 
-//            BanLogic.ProtocolSteps.Add();
+            //            BanLogic.ProtocolSteps.Add();
         }
 
         private void testReceiveRule()
@@ -101,6 +101,87 @@ namespace Proiect_2
 
             var d = new FreshRule(f1, f2);
             var z = d.Result;
+        }
+
+        private void KerberosProtocol()
+        {
+            var AgentA = new Agent();
+            AgentA.Name = "A";
+            var AgentB = new Agent();
+            AgentB.Name = "B";
+            var AgentS = new Agent();
+            AgentS.Name = "S";
+
+            #region A bel A <Kas>S
+
+
+
+            var f1 = new Believe();
+            f1.Agent1 = AgentA;
+            f1.Formula = new SharedKey();
+            ((SharedKey)f1.Formula).Agent1 = f1.Agent1;
+            ((SharedKey)f1.Formula).Agent2 = AgentS;
+            ((SharedKey)f1.Formula).Key = "Kas";
+            BanLogic.ProtocolSteps.Add(f1);
+            #endregion
+
+            #region S bel A<Kas>S
+            var f2 = new Believe();
+            f2.Agent1 = AgentS;
+            f2.Formula = new SharedKey();
+            ((SharedKey)f2.Formula).Agent1 = AgentA;
+            ((SharedKey)f2.Formula).Agent2 = AgentS;
+            ((SharedKey)f2.Formula).Key = "Kas";
+            BanLogic.ProtocolSteps.Add(f2);
+            #endregion
+
+            #region S bel A<Kab>S
+            var f3 = new Believe();
+            f3.Agent1 = AgentS;
+            f3.Formula = new SharedKey();
+            ((SharedKey)f3.Formula).Agent1 = AgentA;
+            ((SharedKey)f3.Formula).Agent2 = AgentS;
+            ((SharedKey)f3.Formula).Key = "Kab";
+            BanLogic.ProtocolSteps.Add(f3);
+            #endregion
+
+            #region A bel S controls A<K>B
+            var f4 = new Believe();
+            f4.Agent1 = AgentA;
+            var f5 = new Controls();
+            f5.Agent1 = AgentS;
+            var f6 = new SharedKey();
+            f4.Formula = f5;
+            f5.Formula = f6;
+            f6.Agent1 = AgentA;
+            f6.Agent2 = AgentB;
+            f6.Key = "K";
+            BanLogic.ProtocolSteps.Add(f4);
+            #endregion
+
+            #region B bel S controls A<K>B
+            var f7 = new Believe();
+            f7.Agent1 = AgentB;
+            var f8 = new Controls();
+            f8.Agent1 = AgentS;
+            var f9 = new SharedKey();
+            f4.Formula = f8;
+            f5.Formula = f9;
+            f6.Agent1 = AgentA;
+            f6.Agent2 = AgentB;
+            f6.Key = "K";
+            BanLogic.ProtocolSteps.Add(f7);
+            #endregion
+
+            #region A bel fresh(TS)
+            var f10 = new Believe();
+            f10.Agent1 = AgentA;
+            var f11 = new Fresh();
+            f11.Message = "TS";
+            f10.Formula = f11;
+            BanLogic.ProtocolSteps.Add(f10);
+            #endregion
+
         }
 
 
