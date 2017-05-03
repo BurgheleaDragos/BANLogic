@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,19 +16,19 @@ namespace Proiect_2
     public partial class Form1 : Form
     {
         public Reader reader;
+        public BanLogic BanLogic { get; set; }
         public Form1()
         {
             InitializeComponent();
             reader = new Reader();
+            BanLogic = new BanLogic();
         }
 
         private void buttonRead_Click(object sender, EventArgs e)
         {
             textBoxRead.Text = reader.ReadData();
             //            reader.Data = textBoxRead.Text + "_test";
-
-            BanLogic bl = new BanLogic(textBoxRead.Text);
-            textBoxWrite.Text = reader.Data = bl.IdealizingProtocol();
+            
             //            textBoxWrite.Text = reader.Data;
             reader.WriteData();
 
@@ -46,8 +46,8 @@ namespace Proiect_2
             {
                 Name = "Agent_A"
             };
-//            step2.Formula = new 
-
+            //            step2.Formula = new 
+//            BanLogic.ProtocolSteps.Add();
         }
 
         private void testReceiveRule()
