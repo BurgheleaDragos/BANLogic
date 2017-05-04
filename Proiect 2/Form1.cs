@@ -114,8 +114,6 @@ namespace Proiect_2
 
             #region A bel A <Kas>S
 
-
-
             var f1 = new Believe();
             f1.Agent1 = AgentA;
             f1.Formula = new SharedKey();
@@ -123,9 +121,11 @@ namespace Proiect_2
             ((SharedKey)f1.Formula).Agent2 = AgentS;
             ((SharedKey)f1.Formula).Key = "Kas";
             BanLogic.ProtocolSteps.Add(f1);
+
             #endregion
 
             #region S bel A<Kas>S
+
             var f2 = new Believe();
             f2.Agent1 = AgentS;
             f2.Formula = new SharedKey();
@@ -133,9 +133,11 @@ namespace Proiect_2
             ((SharedKey)f2.Formula).Agent2 = AgentS;
             ((SharedKey)f2.Formula).Key = "Kas";
             BanLogic.ProtocolSteps.Add(f2);
+
             #endregion
 
             #region S bel A<Kab>S
+
             var f3 = new Believe();
             f3.Agent1 = AgentS;
             f3.Formula = new SharedKey();
@@ -143,9 +145,11 @@ namespace Proiect_2
             ((SharedKey)f3.Formula).Agent2 = AgentS;
             ((SharedKey)f3.Formula).Key = "Kab";
             BanLogic.ProtocolSteps.Add(f3);
+
             #endregion
 
             #region A bel S controls A<K>B
+
             var f4 = new Believe();
             f4.Agent1 = AgentA;
             var f5 = new Controls();
@@ -157,9 +161,11 @@ namespace Proiect_2
             f6.Agent2 = AgentB;
             f6.Key = "K";
             BanLogic.ProtocolSteps.Add(f4);
+
             #endregion
 
             #region B bel S controls A<K>B
+
             var f7 = new Believe();
             f7.Agent1 = AgentB;
             var f8 = new Controls();
@@ -171,15 +177,75 @@ namespace Proiect_2
             f6.Agent2 = AgentB;
             f6.Key = "K";
             BanLogic.ProtocolSteps.Add(f7);
+
             #endregion
 
             #region A bel fresh(TS)
+
             var f10 = new Believe();
             f10.Agent1 = AgentA;
             var f11 = new Fresh();
             f11.Message = "TS";
             f10.Formula = f11;
             BanLogic.ProtocolSteps.Add(f10);
+
+            #endregion
+
+            #region B bel fresh(TS)
+
+            var f12 = new Believe();
+            f12.Agent1 = AgentB;
+            var f13 = new Fresh();
+            f13.Message = "TS";
+            f12.Formula = f13;
+            BanLogic.ProtocolSteps.Add(f12);
+
+            #endregion
+            
+            #region B bel fresh(TA)
+
+            var f14 = new Believe();
+            f14.Agent1 = AgentB;
+            var f15 = new Fresh();
+            f15.Message = "TA";
+            f14.Formula = f15;
+            BanLogic.ProtocolSteps.Add(f14);
+
+            #endregion 
+            
+            #region A bel fresh(TA)
+
+            var f16 = new Believe();
+            f16.Agent1 = AgentA;
+            var f17 = new Fresh();
+            f17.Message = "TA";
+            f16.Formula = f17;
+            BanLogic.ProtocolSteps.Add(f16);
+
+            #endregion
+
+            #region B bel B <Kbs>S
+
+            var f18 = new Believe();
+            f18.Agent1 = AgentB;
+            f18.Formula = new SharedKey();
+            ((SharedKey)f18.Formula).Agent1 = f18.Agent1;
+            ((SharedKey)f18.Formula).Agent2 = AgentS;
+            ((SharedKey)f18.Formula).Key = "Kbs";
+            BanLogic.ProtocolSteps.Add(f18);
+
+            #endregion
+           
+            #region S bel B <Kbs>S
+
+            var f19 = new Believe();
+            f19.Agent1 = AgentS;
+            f19.Formula = new SharedKey();
+            ((SharedKey)f19.Formula).Agent1 = new Agent(){Name="B"};
+            ((SharedKey)f19.Formula).Agent2 = AgentS;
+            ((SharedKey)f19.Formula).Key = "Kbs";
+            BanLogic.ProtocolSteps.Add(f19);
+
             #endregion
 
         }
