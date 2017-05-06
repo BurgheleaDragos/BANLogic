@@ -56,6 +56,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic\AuthenticationRule.cs" />
+    <Compile Include="Logic\ConfirmationKeyRule.cs" />
     <Compile Include="Logic\FreshInjectRule.cs" />
     <Compile Include="Logic\FreshRule.cs" />
     <Compile Include="Logic\IRule.cs" />
