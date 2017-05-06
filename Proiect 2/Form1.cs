@@ -99,7 +99,7 @@ namespace Proiect_2
                 Message = "X"
             };
 
-            var d = new FreshRule(f1, f2);
+            var d = new FreshRule(f1, f1);
             var z = d.Result;
         }
 

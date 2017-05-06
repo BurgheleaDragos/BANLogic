@@ -8,52 +8,41 @@ namespace Proiect_2.Logic
         public BaseLogic Formula1 { get; set; }
         public BaseLogic Formula2 { get; set; }
 
-        public FreshRule()
-        {
-        }
-
+        public FreshRule() { }
         public FreshRule(BaseLogic formula1, BaseLogic formula2)
         {
             Formula1 = formula1;
             Formula2 = formula2;
         }
 
-        public BaseLogic Result
-        {
-            get { return this.GetResult(); }
-        }
+        public BaseLogic Result => GetResult();
 
         private BaseLogic GetResult()
         {
             try
             {
-                Believe formula1 = Formula1 as Believe;
-                Believe formula2 = Formula2 as Believe;
+                var formula1 = Formula1 as Believe;
+                var formula2 = Formula1 as Concatenate;
 
-                if (formula1 != null && //First formula must be of type Receives
-                    formula1.Formula.GetType() == typeof(Said))//The second parameter must be an encrypted value with key K
+                if (formula1 != null &&
+                    formula1.Formula.GetType() == typeof(Fresh))
                 {
-                    var saidFormula = formula1.Formula as Said;
-
-                    if (formula2 != null && //Second formula must be of type Believes
-                        formula2.Formula.GetType() == typeof(Fresh))//The second parameter must be a shared key K
+                    var con = new Concatenate();
+                    foreach (BaseLogic formula in formula2.Formulas)
                     {
-                        var freshFormula = formula2.Formula as Fresh;
-                        if (saidFormula.Message.Equals(freshFormula.Message, StringComparison.InvariantCultureIgnoreCase) &&//The encrypted message key and the shared key between Agent1 and Agent2 are identical
-                            Equals(formula1.Agent1, formula2.Agent1)) //The first Agents are the same
-
+                        if (!string.Equals(formula.Message, formula1.Message,
+                            StringComparison.InvariantCultureIgnoreCase))
                         {
-                            return new Believe
+                            con.Formulas.Add(new Fresh()
                             {
-                                Agent1 = formula1.Agent1,
-                                Formula = new Believe()
-                                {
-                                    Agent1 = saidFormula.Agent1,
-                                    Message = saidFormula.Message
-                                }
-                            };
+                                Formula = formula
+                            });
                         }
                     }
+                    return new Fresh
+                    {
+                        Formula = con
+                    };
                 }
             }
             catch (Exception e)
