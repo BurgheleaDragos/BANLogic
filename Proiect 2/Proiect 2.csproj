@@ -62,6 +62,7 @@
     <Compile Include="Logic\SelectionRuleRSelect.cs" />
     <Compile Include="Syntax\BaseLogic.cs" />
     <Compile Include="Syntax\Believe.cs" />
+    <Compile Include="Syntax\Concatenate.cs" />
     <Compile Include="Syntax\Concatenation.cs" />
     <Compile Include="Syntax\Controls.cs" />
     <Compile Include="Syntax\Encryption.cs" />
