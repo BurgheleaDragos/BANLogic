@@ -59,14 +59,18 @@
     <Compile Include="Logic\FreshRule.cs" />
     <Compile Include="Logic\JurisdictionRule.cs" />
     <Compile Include="Logic\NonceVerificationRule.cs" />
+    <Compile Include="Logic\ReceivePublicRule.cs" />
     <Compile Include="Logic\ReceiveRule.cs" />
+    <Compile Include="Logic\ReceiveSecretRule.cs" />
     <Compile Include="Logic\SelectionRuleBBSelect.cs" />
     <Compile Include="Logic\SelectionRuleBSSelect.cs" />
     <Compile Include="Logic\SelectionRuleRSelect.cs" />
+    <Compile Include="Logic\AuthenticationRule.cs" />
     <Compile Include="Syntax\BaseLogic.cs" />
     <Compile Include="Syntax\Believe.cs" />
     <Compile Include="Syntax\Concatenate.cs" />
     <Compile Include="Syntax\Controls.cs" />
+    <Compile Include="Syntax\EncryptedSecret.cs" />
     <Compile Include="Syntax\Encryption.cs" />
     <Compile Include="Syntax\Fresh.cs" />
     <Compile Include="Program.cs" />
@@ -74,10 +78,13 @@
     <Compile Include="Reader.cs" />
     <Compile Include="Syntax\Jurisdiction.cs" />
     <Compile Include="Syntax\OnceSaid.cs" />
+    <Compile Include="Syntax\PublicEncryption.cs" />
+    <Compile Include="Syntax\PublicKey.cs" />
     <Compile Include="Syntax\Receives.cs" />
     <Compile Include="Syntax\Said.cs" />
     <Compile Include="Syntax\Sees.cs" />
     <Compile Include="Syntax\SharedKey.cs" />
+    <Compile Include="Syntax\SharedSecret.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
