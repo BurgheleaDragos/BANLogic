@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Proiect_2.Syntax;
 
 namespace Proiect_2.Logic
@@ -33,7 +37,12 @@ namespace Proiect_2.Logic
                     formula.Formula.GetType() == typeof(SharedKey)
                 ) //The second parameter must be an encrypted value with key K
                 {
-                    return true;
+                    var encryptedFormula = formula.Formula as SharedSecret;
+                    if (Equals(formula.Agent1, encryptedFormula.Agent1) ||
+                         Equals(formula.Agent1, encryptedFormula.Agent1)) //The  Agents are the same 
+                    {
+                        return true;
+                    }
                 }
             }
             catch (Exception e)
