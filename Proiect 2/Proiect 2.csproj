@@ -35,6 +35,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,8 @@
     </Compile>
     <Compile Include="Logic\FreshInjectRule.cs" />
     <Compile Include="Logic\FreshRule.cs" />
+    <Compile Include="Logic\JurisdictionRule.cs" />
+    <Compile Include="Logic\NonceVerificationRule.cs" />
     <Compile Include="Logic\ReceiveRule.cs" />
     <Compile Include="Logic\SelectionRuleBBSelect.cs" />
     <Compile Include="Logic\SelectionRuleBSSelect.cs" />
