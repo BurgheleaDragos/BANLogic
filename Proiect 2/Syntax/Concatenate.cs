@@ -6,5 +6,9 @@ namespace Proiect_2.Syntax
     {
         public List<BaseLogic> Formulas { get; set; }
 
+        public Concatenate()
+        {
+            Formulas = new List<BaseLogic>();
+        }
     }
 }
