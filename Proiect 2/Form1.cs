@@ -32,7 +32,9 @@ namespace Proiect_2
             //            textBoxWrite.Text = reader.Data;
             reader.WriteData();
 
-            NSSKAlgorithm();
+            //            NSSKAlgorithm();
+
+            KerberosProtocol();
 
             testReceiveRule();
             testFreshRule();
@@ -47,7 +49,7 @@ namespace Proiect_2
                 Name = "Agent_A"
             };
             //            step2.Formula = new 
-            //            BanLogic.ProtocolSteps.Add();
+            //            BanLogic.InitialAssumptions.Add();
         }
 
         private void testReceiveRule()
@@ -120,7 +122,7 @@ namespace Proiect_2
             ((SharedKey)f1.Formula).Agent1 = f1.Agent1;
             ((SharedKey)f1.Formula).Agent2 = AgentS;
             ((SharedKey)f1.Formula).Key = "Kas";
-            BanLogic.ProtocolSteps.Add(f1);
+            BanLogic.InitialAssumptions.Add(f1);
 
             #endregion
 
@@ -132,7 +134,7 @@ namespace Proiect_2
             ((SharedKey)f2.Formula).Agent1 = AgentA;
             ((SharedKey)f2.Formula).Agent2 = AgentS;
             ((SharedKey)f2.Formula).Key = "Kas";
-            BanLogic.ProtocolSteps.Add(f2);
+            BanLogic.InitialAssumptions.Add(f2);
 
             #endregion
 
@@ -144,7 +146,7 @@ namespace Proiect_2
             ((SharedKey)f3.Formula).Agent1 = AgentA;
             ((SharedKey)f3.Formula).Agent2 = AgentS;
             ((SharedKey)f3.Formula).Key = "Kab";
-            BanLogic.ProtocolSteps.Add(f3);
+            BanLogic.InitialAssumptions.Add(f3);
 
             #endregion
 
@@ -160,7 +162,7 @@ namespace Proiect_2
             f6.Agent1 = AgentA;
             f6.Agent2 = AgentB;
             f6.Key = "K";
-            BanLogic.ProtocolSteps.Add(f4);
+            BanLogic.InitialAssumptions.Add(f4);
 
             #endregion
 
@@ -176,7 +178,7 @@ namespace Proiect_2
             f6.Agent1 = AgentA;
             f6.Agent2 = AgentB;
             f6.Key = "K";
-            BanLogic.ProtocolSteps.Add(f7);
+            BanLogic.InitialAssumptions.Add(f7);
 
             #endregion
 
@@ -187,7 +189,7 @@ namespace Proiect_2
             var f11 = new Fresh();
             f11.Message = "TS";
             f10.Formula = f11;
-            BanLogic.ProtocolSteps.Add(f10);
+            BanLogic.InitialAssumptions.Add(f10);
 
             #endregion
 
@@ -198,10 +200,10 @@ namespace Proiect_2
             var f13 = new Fresh();
             f13.Message = "TS";
             f12.Formula = f13;
-            BanLogic.ProtocolSteps.Add(f12);
+            BanLogic.InitialAssumptions.Add(f12);
 
             #endregion
-            
+
             #region B bel fresh(TA)
 
             var f14 = new Believe();
@@ -209,10 +211,10 @@ namespace Proiect_2
             var f15 = new Fresh();
             f15.Message = "TA";
             f14.Formula = f15;
-            BanLogic.ProtocolSteps.Add(f14);
+            BanLogic.InitialAssumptions.Add(f14);
 
-            #endregion 
-            
+            #endregion
+
             #region A bel fresh(TA)
 
             var f16 = new Believe();
@@ -220,7 +222,7 @@ namespace Proiect_2
             var f17 = new Fresh();
             f17.Message = "TA";
             f16.Formula = f17;
-            BanLogic.ProtocolSteps.Add(f16);
+            BanLogic.InitialAssumptions.Add(f16);
 
             #endregion
 
@@ -232,38 +234,38 @@ namespace Proiect_2
             ((SharedKey)f18.Formula).Agent1 = f18.Agent1;
             ((SharedKey)f18.Formula).Agent2 = AgentS;
             ((SharedKey)f18.Formula).Key = "Kbs";
-            BanLogic.ProtocolSteps.Add(f18);
+            BanLogic.InitialAssumptions.Add(f18);
 
             #endregion
-           
+
             #region S bel B <Kbs>S
 
             var f19 = new Believe();
             f19.Agent1 = AgentS;
             f19.Formula = new SharedKey();
-            ((SharedKey)f19.Formula).Agent1 = new Agent(){Name="B"};
+            ((SharedKey)f19.Formula).Agent1 = new Agent() { Name = "B" };
             ((SharedKey)f19.Formula).Agent2 = AgentS;
             ((SharedKey)f19.Formula).Key = "Kbs";
-            BanLogic.ProtocolSteps.Add(f19);
+            BanLogic.InitialAssumptions.Add(f19);
 
             #endregion
 
             #region A sees {Ts, A<Kab>B,{Ts,A<Kab>B}Kbs}Kas
-            var f20=new Encryption();
+            var f20 = new Encryption();
             f20.Key = "Kas";
-            f20.Formula=new Concatenate();
+            f20.Formula = new Concatenate();
             var p1 = new BaseLogic();
             p1.Message = "TS";
             ((Concatenate)f20.Formula).Formulas.Add(p1);
-            var p2= new SharedKey();
+            var p2 = new SharedKey();
             p2.Agent1 = AgentA;
             p2.Agent2 = AgentB;
             p2.Key = "Kab";
-           ((Concatenate)f20.Formula).Formulas.Add(p2);
-            var p3= new Encryption();
+            ((Concatenate)f20.Formula).Formulas.Add(p2);
+            var p3 = new Encryption();
             p3.Key = "Kbs";
             p3.Formula = new Concatenate();
-            var par1= new BaseLogic();
+            var par1 = new BaseLogic();
             p1.Message = "TS";
             ((Concatenate)p3.Formula).Formulas.Add(par1);
             var par2 = new SharedKey();
@@ -272,6 +274,7 @@ namespace Proiect_2
             p2.Key = "Kab";
             ((Concatenate)p3.Formula).Formulas.Add(par2);
             ((Concatenate)f20.Formula).Formulas.Add(p3);
+            BanLogic.ProtocolSteps.Add(f20);
             #endregion // pas2 (KERBEROS)
 
             #region B sees {{Ts, A<Kab>B}Kbs,{Ta,A<Kab>B}Kab}}
@@ -302,6 +305,7 @@ namespace Proiect_2
             msg2.Key = "Kab";
             ((Concatenate)param2.Formula).Formulas.Add(msg2);
             ((Concatenate)f21).Formulas.Add(param2);
+            BanLogic.ProtocolSteps.Add(f21);
             #endregion //   pas3 (KERBEROS)
 
             #region A sees {Ta, A<Kab>B}Kab
@@ -317,8 +321,10 @@ namespace Proiect_2
             v2.Agent2 = AgentB;
             v2.Key = "Kab";
             ((Concatenate)f22.Formula).Formulas.Add(v2);
-
+            BanLogic.ProtocolSteps.Add(f22);
             #endregion //   pas4 (KERBEROS)
+
+            BanLogic.GenerateKnowledge();
         }
 
         private void Form1_Load(object sender, EventArgs e)

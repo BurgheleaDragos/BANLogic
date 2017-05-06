@@ -3,7 +3,7 @@ using Proiect_2.Syntax;
 
 namespace Proiect_2.Logic
 {
-    public class NonceVerificationRule
+    public class NonceVerificationRule : IRule
     {
         public BaseLogic Formula1 { get; set; }
         public BaseLogic Formula2 { get; set; }

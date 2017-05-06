@@ -3,9 +3,10 @@ using Proiect_2.Syntax;
 
 namespace Proiect_2.Logic
 {
-    public class SelectionRuleBBSelect
+    public class SelectionRuleBBSelect : IRule
     {
         public BaseLogic Formula1 { get; set; }
+        public BaseLogic Formula2 { get; set; }
 
         public SelectionRuleBBSelect()
         {
@@ -16,10 +17,7 @@ namespace Proiect_2.Logic
             Formula1 = formula1;
         }
 
-        public BaseLogic Result
-        {
-            get { return this.GetResult(); }
-        }
+        public BaseLogic Result => GetResult();
 
         private BaseLogic GetResult()
         {

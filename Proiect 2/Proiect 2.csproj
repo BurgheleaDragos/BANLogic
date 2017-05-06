@@ -55,8 +55,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic\AuthenticationRule.cs" />
     <Compile Include="Logic\FreshInjectRule.cs" />
     <Compile Include="Logic\FreshRule.cs" />
+    <Compile Include="Logic\IRule.cs" />
     <Compile Include="Logic\JurisdictionRule.cs" />
     <Compile Include="Logic\NonceVerificationRule.cs" />
     <Compile Include="Logic\ReceivePublicRule.cs" />
@@ -65,7 +67,6 @@
     <Compile Include="Logic\SelectionRuleBBSelect.cs" />
     <Compile Include="Logic\SelectionRuleBSSelect.cs" />
     <Compile Include="Logic\SelectionRuleRSelect.cs" />
-    <Compile Include="Logic\AuthenticationRule.cs" />
     <Compile Include="Syntax\BaseLogic.cs" />
     <Compile Include="Syntax\Believe.cs" />
     <Compile Include="Syntax\Concatenate.cs" />
