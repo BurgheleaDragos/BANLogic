@@ -66,7 +66,6 @@
     <Compile Include="Syntax\BaseLogic.cs" />
     <Compile Include="Syntax\Believe.cs" />
     <Compile Include="Syntax\Concatenate.cs" />
-    <Compile Include="Syntax\Concatenation.cs" />
     <Compile Include="Syntax\Controls.cs" />
     <Compile Include="Syntax\Encryption.cs" />
     <Compile Include="Syntax\Fresh.cs" />

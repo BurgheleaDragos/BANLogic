@@ -248,8 +248,82 @@ namespace Proiect_2
 
             #endregion
 
+            #region A sees {Ts, A<Kab>B,{Ts,A<Kab>B}Kbs}Kas
+            var f20=new Encryption();
+            f20.Key = "Kas";
+            f20.Formula=new Concatenate();
+            var p1 = new BaseLogic();
+            p1.Message = "TS";
+            ((Concatenate)f20.Formula).Formulas.Add(p1);
+            var p2= new SharedKey();
+            p2.Agent1 = AgentA;
+            p2.Agent2 = AgentB;
+            p2.Key = "Kab";
+           ((Concatenate)f20.Formula).Formulas.Add(p2);
+            var p3= new Encryption();
+            p3.Key = "Kbs";
+            p3.Formula = new Concatenate();
+            var par1= new BaseLogic();
+            p1.Message = "TS";
+            ((Concatenate)p3.Formula).Formulas.Add(par1);
+            var par2 = new SharedKey();
+            p2.Agent1 = AgentA;
+            p2.Agent2 = AgentB;
+            p2.Key = "Kab";
+            ((Concatenate)p3.Formula).Formulas.Add(par2);
+            ((Concatenate)f20.Formula).Formulas.Add(p3);
+            #endregion // pas2 (KERBEROS)
+
+            #region B sees {{Ts, A<Kab>B}Kbs,{Ta,A<Kab>B}Kab}}
+
+            var f21 = new Concatenate();
+            var param1 = new Encryption();
+            param1.Key = "Kbs";
+            param1.Formula = new Concatenate();
+            var m1 = new BaseLogic();
+            m1.Message = "TS";
+            ((Concatenate)param1.Formula).Formulas.Add(m1);
+            var m2 = new SharedKey();
+            m2.Agent1 = AgentA;
+            m2.Agent2 = AgentB;
+            m2.Key = "Kab";
+            ((Concatenate)param1.Formula).Formulas.Add(m2);
+            ((Concatenate)f21).Formulas.Add(param1);
+
+            var param2 = new Encryption();
+            param2.Key = "Kab";
+            param2.Formula = new Concatenate();
+            var msg1 = new BaseLogic();
+            msg1.Message = "Ta";
+            ((Concatenate)param2.Formula).Formulas.Add(msg1);
+            var msg2 = new SharedKey();
+            msg2.Agent1 = AgentA;
+            msg2.Agent2 = AgentB;
+            msg2.Key = "Kab";
+            ((Concatenate)param2.Formula).Formulas.Add(msg2);
+            ((Concatenate)f21).Formulas.Add(param2);
+            #endregion //   pas3 (KERBEROS)
+
+            #region A sees {Ta, A<Kab>B}Kab
+
+            var f22 = new Encryption();
+            f22.Key = "Kab";
+            f22.Formula = new Concatenate();
+            var v1 = new BaseLogic();
+            v1.Message = "Ta";
+            ((Concatenate)f22.Formula).Formulas.Add(v1);
+            var v2 = new SharedKey();
+            v2.Agent1 = AgentA;
+            v2.Agent2 = AgentB;
+            v2.Key = "Kab";
+            ((Concatenate)f22.Formula).Formulas.Add(v2);
+
+            #endregion //   pas4 (KERBEROS)
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
