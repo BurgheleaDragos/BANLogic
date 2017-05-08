@@ -12,10 +12,14 @@ namespace Proiect_2
         public BanLogic()
         {
             InitialAssumptions = new List<BaseLogic>();
+            ProtocolSteps = new List<BaseLogic>();
+            CurrentKnowledge = new List<BaseLogic>();
         }
-        public BanLogic(List<BaseLogic> initialAssumptions)
+        public BanLogic(List<BaseLogic> initialAssumptions, List<BaseLogic> protocolSteps, List<BaseLogic> currentKnowledge)
         {
             InitialAssumptions = initialAssumptions;
+            ProtocolSteps = protocolSteps;
+            CurrentKnowledge = currentKnowledge;
         }
 
         public void GenerateKnowledge()
@@ -30,28 +34,48 @@ namespace Proiect_2
         {
             foreach (var initialAssumption in InitialAssumptions)
             {
-                #region ReceiveRule
-                IRule receiveRule = new ReceiveRule(protocolStep, initialAssumption);
-                BaseLogic receiveRuleResult = receiveRule.Result;
-                if (receiveRuleResult != null)
-                {
-                    InitialAssumptions.Add(receiveRuleResult);
-                }
-                IRule receiveRule2 = new ReceiveRule(initialAssumption, protocolStep);
-                BaseLogic receiveRule2Result = receiveRule2.Result;
-                if (receiveRule2Result != null)
-                {
-                    InitialAssumptions.Add(receiveRule2Result);
-                }
-                #endregion
+                this.TestRule(protocolStep, initialAssumption);
             }
-
             foreach (var currentKnowledge in CurrentKnowledge)
             {
-                
+                TestRule(protocolStep, currentKnowledge);
             }
+            var c = new Fresh();
+
         }
 
+        private void TestRule(BaseLogic protocolStep, BaseLogic initialAssumption)
+        {
+            #region ReceiveRule
+
+            //            IRule receiveRule = new ReceiveRule(protocolStep, initialAssumption);
+            //            BaseLogic receiveRuleResult = receiveRule.Result;
+            BaseLogic receiveRuleResult = ReceiveRule.GetResult(protocolStep, initialAssumption);
+            if (receiveRuleResult != null)
+            {
+                CurrentKnowledge.Add(receiveRuleResult);
+            }
+            //            IRule receiveRule2 = new ReceiveRule(initialAssumption, protocolStep);
+            //            BaseLogic receiveRule2Result = receiveRule2.Result;
+            BaseLogic receiveRule2Result = ReceiveRule.GetResult(initialAssumption, protocolStep);
+            if (receiveRule2Result != null)
+            {
+                CurrentKnowledge.Add(receiveRule2Result);
+            }
+            #endregion
+            #region FreshRule
+
+            #endregion
+
+            #region ConcatenateRule
+            var concatRule = ConcatenateRule.GetResult(initialAssumption);
+            if (concatRule != null)
+            {
+                CurrentKnowledge.AddRange(concatRule);
+            }
+            #endregion
+
+        }
 
     }
 }

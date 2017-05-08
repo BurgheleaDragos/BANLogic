@@ -11,10 +11,15 @@ namespace Proiect_2.Logic
     {
         public BaseLogic Formula1 { get; set; }
         public BaseLogic Formula2 { get; set; }
-        public BaseLogic Result => GetResult();
+        public BaseLogic Result => RuleLogic(Formula1, Formula2);
 
         public ReceiveRule()
         {
+        }
+
+        public static BaseLogic GetResult(BaseLogic formula1, BaseLogic formula2)
+        {
+            return RuleLogic(formula1, formula2);
         }
 
         public ReceiveRule(BaseLogic formula1, BaseLogic formula2)
@@ -23,12 +28,12 @@ namespace Proiect_2.Logic
             Formula2 = formula2;
         }
 
-        private BaseLogic GetResult()
+        private static BaseLogic RuleLogic(BaseLogic _formula1, BaseLogic _formula2)
         {
             try
             {
-                Receives formula1 = Formula1 as Receives;
-                Believe formula2 = Formula2 as Believe;
+                Receives formula1 = _formula1 as Receives;
+                Believe formula2 = _formula2 as Believe;
 
                 if (formula1 != null && //First formula must be of type Receives
                     formula1.Formula.GetType() == typeof(Encryption))//The second parameter must be an encrypted value with key K
@@ -49,7 +54,7 @@ namespace Proiect_2.Logic
                                 Formula = new Said
                                 {
                                     Agent1 = sharedKey.Agent2,
-                                    Message = encryptionFormula.Value
+                                    Formula = encryptionFormula.Formula
                                 }
                             };
                         }
@@ -62,6 +67,52 @@ namespace Proiect_2.Logic
                 throw;
             }
             return null;
+        }
+        private BaseLogic GetResult()
+        {
+            return RuleLogic(Formula1, Formula2);
+        }
+    }
+    public class ConcatenateRule
+    {
+        public BaseLogic Formula1 { get; set; }
+        public List<BaseLogic> Result => RuleLogic(Formula1);
+
+        public ConcatenateRule()
+        {
+        }
+
+        public static List<BaseLogic> GetResult(BaseLogic formula1)
+        {
+            return RuleLogic(formula1);
+        }
+
+        public ConcatenateRule(BaseLogic formula1)
+        {
+            Formula1 = formula1;
+        }
+
+        private static List<BaseLogic> RuleLogic(BaseLogic _formula1)
+        {
+            try
+            {
+                var formula1 = _formula1 as Concatenate;
+
+                if (formula1 != null) //First formula must be of type Receives
+                {
+                    return formula1.Formulas;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            return null;
+        }
+        private List<BaseLogic> GetResult()
+        {
+            return RuleLogic(Formula1);
         }
     }
 }

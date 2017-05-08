@@ -44,7 +44,7 @@ namespace Proiect_2.Logic
                         formula2.Formula.GetType() == typeof(PublicEncryption))//The second parameter must be an encrypted secret
                     {
                         var encryptedFormula = formula2.Formula as PublicEncryption;
-                        if (encryptedFormula.Key.Equals(encryptedFormula.Key, StringComparison.InvariantCultureIgnoreCase) &&//The encrypted message key and the shared key between Agent1 and Agent2 are identical
+                        if (encryptedFormula.Key.Equals(encryptedFormula.Key) &&//The encrypted message key and the shared key between Agent1 and Agent2 are identical
                             Equals(formula1.Agent1, formula2.Agent1) &&//The first Agents are the same
                             encryptedFormula.Agent1.Equals(formula1.Agent1))// the shared key agent is the same with the agent from the first formula.
                         {
@@ -54,7 +54,7 @@ namespace Proiect_2.Logic
                                 Formula = new Said
                                 {
                                     Agent1 = encryptedFormula.Agent1,
-                                    Message = encryptedFormula.Key
+                                    Formula = encryptedFormula.Key
                                 }
                             };
                         }
