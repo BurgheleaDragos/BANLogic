@@ -26,11 +26,11 @@ namespace Proiect_2
 
         private void buttonRead_Click(object sender, EventArgs e)
         {
-            textBoxRead.Text = reader.ReadData();
+            //            textBoxRead.Text = reader.ReadData();
             //            reader.Data = textBoxRead.Text + "_test";
 
             //            textBoxWrite.Text = reader.Data;
-            reader.WriteData();
+            //            reader.WriteData();
 
             //            NSSKAlgorithm();
 
@@ -335,13 +335,16 @@ namespace Proiect_2
             BanLogic.ProtocolSteps.Add(step3);
             #endregion //   pas4 (KERBEROS)
 
-            BanLogic.GenerateKnowledge();
+            BanLogic.ProtocolStepsKnowledge();
 
             var readerStrBuilder = new StringBuilder();
+            readerStrBuilder.AppendLine("Initial Assumptions: ");
             foreach (var initialAssumption in BanLogic.InitialAssumptions)
             {
                 readerStrBuilder.AppendLine(initialAssumption.ToString());
             }
+            readerStrBuilder.AppendLine();
+            readerStrBuilder.AppendLine("Protocol steps: ");
             foreach (var protocolStep in BanLogic.ProtocolSteps)
             {
                 readerStrBuilder.AppendLine(protocolStep.ToString());

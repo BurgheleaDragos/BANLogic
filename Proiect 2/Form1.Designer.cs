@@ -31,6 +31,8 @@
             this.buttonRead = new System.Windows.Forms.Button();
             this.textBoxRead = new System.Windows.Forms.TextBox();
             this.textBoxWrite = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonRead
@@ -45,25 +47,47 @@
             // 
             // textBoxRead
             // 
-            this.textBoxRead.Location = new System.Drawing.Point(13, 14);
+            this.textBoxRead.Location = new System.Drawing.Point(13, 36);
             this.textBoxRead.Multiline = true;
             this.textBoxRead.Name = "textBoxRead";
-            this.textBoxRead.Size = new System.Drawing.Size(532, 235);
+            this.textBoxRead.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxRead.Size = new System.Drawing.Size(532, 213);
             this.textBoxRead.TabIndex = 1;
             // 
             // textBoxWrite
             // 
-            this.textBoxWrite.Location = new System.Drawing.Point(13, 256);
+            this.textBoxWrite.Location = new System.Drawing.Point(13, 277);
             this.textBoxWrite.Multiline = true;
             this.textBoxWrite.Name = "textBoxWrite";
-            this.textBoxWrite.Size = new System.Drawing.Size(532, 239);
+            this.textBoxWrite.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxWrite.Size = new System.Drawing.Size(532, 218);
             this.textBoxWrite.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(95, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Initial assumptions:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 256);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Current knowledge:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 507);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxWrite);
             this.Controls.Add(this.textBoxRead);
             this.Controls.Add(this.buttonRead);
@@ -80,6 +104,8 @@
         private System.Windows.Forms.Button buttonRead;
         private System.Windows.Forms.TextBox textBoxRead;
         private System.Windows.Forms.TextBox textBoxWrite;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

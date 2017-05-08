@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Elements\Agent.cs" />
     <Compile Include="BANLogic.cs" />
+    <Compile Include="Elements\Key.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

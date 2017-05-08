@@ -22,6 +22,12 @@ namespace Proiect_2.Logic
             try
             {
                 var formula1 = Formula1 as Believe;
+                var formula2 = Formula2 as Believe;
+
+                return null;
+
+                /*
+                var formula1 = Formula1 as Believe;
                 var formula2 = Formula1 as Concatenate;
 
                 if (formula1 != null &&
@@ -43,7 +49,7 @@ namespace Proiect_2.Logic
                     {
                         Formula = con
                     };
-                }
+                }*/
             }
             catch (Exception e)
             {

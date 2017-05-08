@@ -9,6 +9,7 @@ namespace Proiect_2
         public List<BaseLogic> InitialAssumptions;
         public List<BaseLogic> ProtocolSteps;
         public List<BaseLogic> CurrentKnowledge;
+        public Queue<BaseLogic> CurrentKnowledgeQueue;
         public BanLogic()
         {
             InitialAssumptions = new List<BaseLogic>();
@@ -22,10 +23,11 @@ namespace Proiect_2
             CurrentKnowledge = currentKnowledge;
         }
 
-        public void GenerateKnowledge()
+        public void ProtocolStepsKnowledge()
         {
             foreach (var protocolStep in ProtocolSteps)
             {
+                CurrentKnowledge.Add(protocolStep);
                 CheckKnowledge(protocolStep);
             }
         }
@@ -34,18 +36,36 @@ namespace Proiect_2
         {
             foreach (var initialAssumption in InitialAssumptions)
             {
-                this.TestRule(protocolStep, initialAssumption);
+                if (TestRule(protocolStep, initialAssumption))
+                {
+                    break;
+                }
             }
-            var localCopy = CurrentKnowledge.ToArray();
-            foreach (var currentKnowledge in localCopy)
+            int i = 1;
+            do
             {
-                TestRule(protocolStep, currentKnowledge);
-            }
-            var c = new Fresh();
+                if (CurrentKnowledge.Count > i)
+                {
+                    var logic = CurrentKnowledge[i];
+                    foreach (var initialAssumption in InitialAssumptions)
+                    {
+                        if (TestRule(logic, initialAssumption))
+                        {
+                            break;
+                        }
+                    }
+                    i++;
+                }
+                else
+                {
+                    break;
+                }
+
+            } while (true);
 
         }
 
-        private void TestRule(BaseLogic protocolStep, BaseLogic initialAssumption)
+        private bool TestRule(BaseLogic protocolStep, BaseLogic initialAssumption)
         {
             #region ReceiveRule
 
@@ -53,26 +73,35 @@ namespace Proiect_2
             if (receiveRuleResult != null)
             {
                 CurrentKnowledge.Add(receiveRuleResult);
+                return true;
             }
             BaseLogic receiveRule2Result = (BaseLogic)RuleInstance<ReceiveRule>.GetResult(initialAssumption, protocolStep);
             if (receiveRule2Result != null)
             {
                 CurrentKnowledge.Add(receiveRule2Result);
+                return true;
             }
             #endregion
             #region FreshRule
 
-            #endregion
-
-            #region ConcatenateRule
-
-            var concatRule = (List<BaseLogic>)RuleInstance<ConcatenateRule>.GetResult(initialAssumption);
-            if (concatRule != null)
+            BaseLogic freshRule = (BaseLogic)RuleInstance<FreshRule>.GetResult(protocolStep, initialAssumption);
+            if (freshRule != null)
             {
-                CurrentKnowledge.AddRange(concatRule);
+                CurrentKnowledge.Add(freshRule);
+                return true;
             }
             #endregion
 
+            #region ConcatenateRule
+            var concatRule = (List<BaseLogic>)RuleInstance<ConcatenateRule>.GetResult(protocolStep);
+            if (concatRule != null)
+            {
+                CurrentKnowledge.AddRange(concatRule);
+                return true;
+            }
+            #endregion
+
+            return false;
         }
 
     }
