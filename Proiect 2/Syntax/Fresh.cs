@@ -6,7 +6,7 @@ namespace Proiect_2.Syntax
 
         public override string ToString()
         {
-            return Formula != null ? $"{Formula} is fresh" : $"{Message} is fresh";
+            return Formula != null ? $"Fresh({Formula})" : $"Fresh({Message})";
         }
     }
 }

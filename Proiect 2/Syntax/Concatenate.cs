@@ -15,10 +15,12 @@ namespace Proiect_2.Syntax
         public override string ToString()
         {
             var str = new StringBuilder();
-            foreach (var formula in Formulas)
+            for (var index = 0; index < Formulas.Count - 1; index++)
             {
-                str.Append($"{formula} and");
+                var formula = Formulas[index];
+                str.Append($"{formula}, ");
             }
+            str.Append($"{Formulas[Formulas.Count - 1]}");
             return str.ToString();
         }
     }

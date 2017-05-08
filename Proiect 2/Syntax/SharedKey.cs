@@ -9,7 +9,7 @@ namespace Proiect_2.Syntax
         public string Key { get; set; }
         public override string ToString()
         {
-            return $"{Agent1} and {Agent2} have the shared key {Key}";
+            return $"{Agent1} <--{Key}--> {Agent2}";
         }
     }
 }
