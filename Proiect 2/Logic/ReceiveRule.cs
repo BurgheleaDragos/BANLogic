@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,48 +70,6 @@ namespace Proiect_2.Logic
         private BaseLogic GetResult()
         {
             return RuleLogic(Formula1, Formula2);
-        }
-    }
-    public class ConcatenateRule
-    {
-        public BaseLogic Formula1 { get; set; }
-        public List<BaseLogic> Result => RuleLogic(Formula1);
-
-        public ConcatenateRule()
-        {
-        }
-
-        public static List<BaseLogic> GetResult(BaseLogic formula1)
-        {
-            return RuleLogic(formula1);
-        }
-
-        public ConcatenateRule(BaseLogic formula1)
-        {
-            Formula1 = formula1;
-        }
-
-        private static List<BaseLogic> RuleLogic(BaseLogic _formula1)
-        {
-            try
-            {
-                var formula1 = _formula1 as Concatenate;
-
-                if (formula1 != null) //First formula must be of type Receives
-                {
-                    return formula1.Formulas;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            return null;
-        }
-        private List<BaseLogic> GetResult()
-        {
-            return RuleLogic(Formula1);
         }
     }
 }

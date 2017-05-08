@@ -11,32 +11,24 @@ namespace Proiect_2.Logic
     {
         public BaseLogic Formula { get; set; }
 
-        public bool Result
-        {
-            get { return this.GetResult(); }
-        }
+        public bool Result => GetResult();
 
         public ConfirmationKeyRule()
         {
         }
-
         public ConfirmationKeyRule(BaseLogic formula)
         {
             Formula = formula;
-
         }
-
         private bool GetResult()
         {
             try
             {
-
                 Believe formula = Formula as Believe;
 
                 if (formula != null && //First formula must be of type Believe
                     formula.Formula.GetType() == typeof(Believe) && ((Believe)formula.Formula).Formula.GetType() == typeof(SharedKey) // there are two believe formulas and one SharedKey formulas 
-
-                )
+                    )
                 {
                     var encryptedFormula1 = formula.Formula as Believe;
                     var encryptedFormula2 = encryptedFormula1.Formula as SharedKey;

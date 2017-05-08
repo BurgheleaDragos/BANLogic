@@ -36,7 +36,8 @@ namespace Proiect_2
             {
                 this.TestRule(protocolStep, initialAssumption);
             }
-            foreach (var currentKnowledge in CurrentKnowledge)
+            var localCopy = CurrentKnowledge.ToArray();
+            foreach (var currentKnowledge in localCopy)
             {
                 TestRule(protocolStep, currentKnowledge);
             }
@@ -48,16 +49,12 @@ namespace Proiect_2
         {
             #region ReceiveRule
 
-            //            IRule receiveRule = new ReceiveRule(protocolStep, initialAssumption);
-            //            BaseLogic receiveRuleResult = receiveRule.Result;
-            BaseLogic receiveRuleResult = ReceiveRule.GetResult(protocolStep, initialAssumption);
+            BaseLogic receiveRuleResult = (BaseLogic)RuleInstance<ReceiveRule>.GetResult(protocolStep, initialAssumption);
             if (receiveRuleResult != null)
             {
                 CurrentKnowledge.Add(receiveRuleResult);
             }
-            //            IRule receiveRule2 = new ReceiveRule(initialAssumption, protocolStep);
-            //            BaseLogic receiveRule2Result = receiveRule2.Result;
-            BaseLogic receiveRule2Result = ReceiveRule.GetResult(initialAssumption, protocolStep);
+            BaseLogic receiveRule2Result = (BaseLogic)RuleInstance<ReceiveRule>.GetResult(initialAssumption, protocolStep);
             if (receiveRule2Result != null)
             {
                 CurrentKnowledge.Add(receiveRule2Result);
@@ -68,7 +65,8 @@ namespace Proiect_2
             #endregion
 
             #region ConcatenateRule
-            var concatRule = ConcatenateRule.GetResult(initialAssumption);
+
+            var concatRule = (List<BaseLogic>)RuleInstance<ConcatenateRule>.GetResult(initialAssumption);
             if (concatRule != null)
             {
                 CurrentKnowledge.AddRange(concatRule);

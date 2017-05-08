@@ -56,6 +56,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic\AuthenticationRule.cs" />
+    <Compile Include="Logic\ConcatenateRule.cs" />
     <Compile Include="Logic\ConfirmationKeyRule.cs" />
     <Compile Include="Logic\FreshInjectRule.cs" />
     <Compile Include="Logic\FreshRule.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Logic\ReceivePublicRule.cs" />
     <Compile Include="Logic\ReceiveRule.cs" />
     <Compile Include="Logic\ReceiveSecretRule.cs" />
+    <Compile Include="Logic\RuleInstance.cs" />
     <Compile Include="Logic\SelectionRuleBBSelect.cs" />
     <Compile Include="Logic\SelectionRuleBSSelect.cs" />
     <Compile Include="Logic\SelectionRuleRSelect.cs" />

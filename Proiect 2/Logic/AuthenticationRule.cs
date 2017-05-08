@@ -11,26 +11,18 @@ namespace Proiect_2.Logic
     {
         public BaseLogic Formula { get; set; }
 
-        public bool Result
-        {
-            get { return this.GetResult(); }
-        }
-
+        public bool Result => GetResult();
         public AuthenticationRule()
         {
         }
-
         public AuthenticationRule(BaseLogic formula)
         {
             Formula = formula;
-           
         }
-
         private bool GetResult()
         {
             try
             {
-
                 Believe formula = Formula as Believe;
 
                 if (formula != null && //First formula must be of type Believe
