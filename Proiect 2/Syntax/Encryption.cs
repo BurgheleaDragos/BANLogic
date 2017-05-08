@@ -6,5 +6,10 @@ namespace Proiect_2.Syntax
         public string Value { get; set; }
         public string Key { get; set; }
         public SharedKey FormulaKey { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Formula} encrypted with {Key}";
+        }
     }
 }

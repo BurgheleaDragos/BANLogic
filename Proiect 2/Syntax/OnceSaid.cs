@@ -6,5 +6,9 @@ namespace Proiect_2.Syntax
     {
         public Agent Agent1 { get; set; }
         public BaseLogic Formula { get; set; }
+        public override string ToString()
+        {
+            return $"{Agent1} once said {Formula}";
+        }
     }
 }

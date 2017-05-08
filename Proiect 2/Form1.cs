@@ -173,11 +173,11 @@ namespace Proiect_2
             var f8 = new Controls();
             f8.Agent1 = AgentS;
             var f9 = new SharedKey();
-            f4.Formula = f8;
-            f5.Formula = f9;
-            f6.Agent1 = AgentA;
-            f6.Agent2 = AgentB;
-            f6.Key = "K";
+            f7.Formula = f8;
+            f8.Formula = f9;
+            f9.Agent1 = AgentA;
+            f9.Agent2 = AgentB;
+            f9.Key = "K";
             BanLogic.InitialAssumptions.Add(f7);
 
             #endregion
@@ -251,30 +251,35 @@ namespace Proiect_2
             #endregion
 
             #region A sees {Ts, A<Kab>B,{Ts,A<Kab>B}Kbs}Kas
-            var f20 = new Encryption();
-            f20.Key = "Kas";
-            f20.Formula = new Concatenate();
-            var p1 = new BaseLogic();
-            p1.Message = "TS";
-            ((Concatenate)f20.Formula).Formulas.Add(p1);
-            var p2 = new SharedKey();
-            p2.Agent1 = AgentA;
-            p2.Agent2 = AgentB;
-            p2.Key = "Kab";
-            ((Concatenate)f20.Formula).Formulas.Add(p2);
-            var p3 = new Encryption();
-            p3.Key = "Kbs";
-            p3.Formula = new Concatenate();
-            var par1 = new BaseLogic();
-            p1.Message = "TS";
-            ((Concatenate)p3.Formula).Formulas.Add(par1);
-            var par2 = new SharedKey();
-            p2.Agent1 = AgentA;
-            p2.Agent2 = AgentB;
-            p2.Key = "Kab";
-            ((Concatenate)p3.Formula).Formulas.Add(par2);
-            ((Concatenate)f20.Formula).Formulas.Add(p3);
-            BanLogic.ProtocolSteps.Add(f20);
+
+            var step1EncryptionRule = new Encryption
+            {
+                Key = "Kas",
+                Formula = new Concatenate()
+            };
+            var step1BaseLogicTs = new BaseLogic { Message = "TS" };
+            ((Concatenate)step1EncryptionRule.Formula).Formulas.Add(step1BaseLogicTs);
+            var step1SharedKey = new SharedKey
+            {
+                Agent1 = AgentA,
+                Agent2 = AgentB,
+                Key = "Kab"
+            };
+            ((Concatenate)step1EncryptionRule.Formula).Formulas.Add(step1SharedKey);
+            var p3 = new Encryption
+            {
+                Key = "Kbs",
+                Formula = new Concatenate()
+            };
+            ((Concatenate)p3.Formula).Formulas.Add(step1BaseLogicTs);
+            ((Concatenate)p3.Formula).Formulas.Add(step1SharedKey);
+            ((Concatenate)step1EncryptionRule.Formula).Formulas.Add(p3);
+            var step1 = new Receives
+            {
+                Agent1 = AgentA,
+                Formula = step1EncryptionRule
+            };
+            BanLogic.ProtocolSteps.Add(step1);
             #endregion // pas2 (KERBEROS)
 
             #region B sees {{Ts, A<Kab>B}Kbs,{Ta,A<Kab>B}Kab}}
@@ -305,7 +310,10 @@ namespace Proiect_2
             msg2.Key = "Kab";
             ((Concatenate)param2.Formula).Formulas.Add(msg2);
             ((Concatenate)f21).Formulas.Add(param2);
-            BanLogic.ProtocolSteps.Add(f21);
+            var step2 = new Receives();
+            step2.Agent1 = AgentB;
+            step2.Formula = f21;
+            BanLogic.ProtocolSteps.Add(step2);
             #endregion //   pas3 (KERBEROS)
 
             #region A sees {Ta, A<Kab>B}Kab
@@ -321,10 +329,30 @@ namespace Proiect_2
             v2.Agent2 = AgentB;
             v2.Key = "Kab";
             ((Concatenate)f22.Formula).Formulas.Add(v2);
-            BanLogic.ProtocolSteps.Add(f22);
+            var step3 = new Receives();
+            step3.Agent1 = AgentA;
+            step3.Formula = f22;
+            BanLogic.ProtocolSteps.Add(step3);
             #endregion //   pas4 (KERBEROS)
 
             BanLogic.GenerateKnowledge();
+
+            var readerStrBuilder = new StringBuilder();
+            foreach (var initialAssumption in BanLogic.InitialAssumptions)
+            {
+                readerStrBuilder.AppendLine(initialAssumption.ToString());
+            }
+            foreach (var protocolStep in BanLogic.ProtocolSteps)
+            {
+                readerStrBuilder.AppendLine(protocolStep.ToString());
+            }
+            textBoxRead.Text = readerStrBuilder.ToString();
+            var strBuilder = new StringBuilder();
+            foreach (var logic in BanLogic.CurrentKnowledge)
+            {
+                strBuilder.AppendLine(logic.ToString());
+            }
+            textBoxWrite.Text = strBuilder.ToString();
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 
 namespace Proiect_2.Syntax
 {
@@ -9,6 +10,16 @@ namespace Proiect_2.Syntax
         public Concatenate()
         {
             Formulas = new List<BaseLogic>();
+        }
+
+        public override string ToString()
+        {
+            var str = new StringBuilder();
+            foreach (var formula in Formulas)
+            {
+                str.Append($"{formula} and");
+            }
+            return str.ToString();
         }
     }
 }

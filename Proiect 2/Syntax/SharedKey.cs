@@ -7,5 +7,9 @@ namespace Proiect_2.Syntax
         public Agent Agent1 { get; set; }
         public Agent Agent2 { get; set; }
         public string Key { get; set; }
+        public override string ToString()
+        {
+            return $"{Agent1} and {Agent2} have the shared key {Key}";
+        }
     }
 }

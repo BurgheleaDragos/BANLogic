@@ -17,6 +17,11 @@ namespace Proiect_2.Elements
             }
             return true;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
 }

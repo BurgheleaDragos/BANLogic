@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Proiect_2.Syntax
 {
-   public class EncryptedSecret :BaseLogic
+    public class EncryptedSecret : BaseLogic
     {
         public string Key { set; get; }
-        
-    }
+
+        public override string ToString()
+        {
+            return $"Encrypted Secret: {Key}";
+        }
     }
 }
