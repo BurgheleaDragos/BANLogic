@@ -28,8 +28,9 @@ namespace Proiect_2.Syntax
         {
             var said = obj as Concatenate;
             if (said == null) return false;
-            return said.Message == Message &&
-                   (said.Formulas != null && Formulas != null && said.Formulas.Equals(Formulas));
+            if (said.Message == Message &&
+                (said.Formulas != null && Formulas != null && said.Formulas.Equals(Formulas))) return true;
+            return false;
         }
     }
 }
