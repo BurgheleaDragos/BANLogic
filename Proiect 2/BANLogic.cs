@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Proiect_2.Logic;
 using Proiect_2.Syntax;
 
@@ -38,7 +39,7 @@ namespace Proiect_2
             {
                 if (TestRule(protocolStep, initialAssumption))
                 {
-                    break;
+                    //                    break;
                 }
             }
             int i = 1;
@@ -51,7 +52,7 @@ namespace Proiect_2
                     {
                         if (TestRule(logic, initialAssumption))
                         {
-                            break;
+                            //                            break;
                         }
                     }
                     i++;
@@ -67,41 +68,55 @@ namespace Proiect_2
 
         private bool TestRule(BaseLogic protocolStep, BaseLogic initialAssumption)
         {
+            bool added = false;
+            #region FreshRule
+            BaseLogic freshRule = (BaseLogic)RuleInstance<FreshRule>.GetResult(protocolStep, initialAssumption);
+            if (freshRule != null)
+            {
+                if (!CurrentKnowledge.Contains(freshRule))
+                {
+                    CurrentKnowledge.Add(freshRule);
+                    added = true;
+                }
+            }
+            #endregion
             #region ReceiveRule
-
             BaseLogic receiveRuleResult = (BaseLogic)RuleInstance<ReceiveRule>.GetResult(protocolStep, initialAssumption);
             if (receiveRuleResult != null)
             {
-                CurrentKnowledge.Add(receiveRuleResult);
-                return true;
+                if (!CurrentKnowledge.Contains(receiveRuleResult))
+                {
+                    CurrentKnowledge.Add(receiveRuleResult);
+                    added = true;
+                }
             }
             BaseLogic receiveRule2Result = (BaseLogic)RuleInstance<ReceiveRule>.GetResult(initialAssumption, protocolStep);
             if (receiveRule2Result != null)
             {
-                CurrentKnowledge.Add(receiveRule2Result);
-                return true;
-            }
-            #endregion
-            #region FreshRule
-
-            BaseLogic freshRule = (BaseLogic)RuleInstance<FreshRule>.GetResult(protocolStep, initialAssumption);
-            if (freshRule != null)
-            {
-                CurrentKnowledge.Add(freshRule);
-                return true;
+                if (!CurrentKnowledge.Contains(receiveRule2Result))
+                {
+                    CurrentKnowledge.Add(receiveRule2Result);
+                    added = true;
+                }
             }
             #endregion
 
             #region ConcatenateRule
-            var concatRule = (List<BaseLogic>)RuleInstance<ConcatenateRule>.GetResult(protocolStep);
-            if (concatRule != null)
+            var concatRules = (List<BaseLogic>)RuleInstance<ConcatenateRule>.GetResult(protocolStep);
+            if (concatRules != null)
             {
-                CurrentKnowledge.AddRange(concatRule);
-                return true;
+                foreach (var concatRule in concatRules)
+                {
+                    if (!CurrentKnowledge.Contains(concatRule))
+                    {
+                        CurrentKnowledge.Add(concatRule);
+                        added = true;
+                    }
+                }
             }
             #endregion
 
-            return false;
+            return added;
         }
 
     }

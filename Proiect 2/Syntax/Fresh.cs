@@ -8,5 +8,13 @@ namespace Proiect_2.Syntax
         {
             return Formula != null ? $"Fresh({Formula})" : $"Fresh({Message})";
         }
+
+        public override bool Equals(object obj)
+        {
+            var said = obj as Fresh;
+            if (said == null) return false;
+            return said.Message == Message &&
+                   (said.Formula != null && Formula != null && said.Formula.Equals(Formula));
+        }
     }
 }
