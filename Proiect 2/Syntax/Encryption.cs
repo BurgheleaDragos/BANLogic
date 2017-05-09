@@ -9,7 +9,7 @@ namespace Proiect_2.Syntax
 
         public override string ToString()
         {
-            return $"{{{Formula}}} {Key}";
+            return Formula != null ? $"{{{Formula}}} {Key}" : $"{{{Message}}} {Key}";
         }
     }
 }
