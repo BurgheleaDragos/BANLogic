@@ -47,15 +47,23 @@ namespace Proiect_2.Logic
                             Equals(formula1.Agent1, formula2.Agent1) &&//The first Agents are the same
                             sharedKey.Agent1.Equals(formula1.Agent1))// the shared key agent is the same with the agent from the first formula.
                         {
-                            return new Believe
+                            var logic = new Believe
                             {
                                 Agent1 = formula1.Agent1,
-                                Formula = new Said
+                                Formula = new Said()
                                 {
-                                    Agent1 = sharedKey.Agent2,
-                                    Formula = encryptionFormula.Formula
+                                    Agent1 = sharedKey.Agent2
                                 }
                             };
+                            if (encryptionFormula.Formula != null)
+                            {
+                                ((Said)logic.Formula).Formula = encryptionFormula.Formula;
+                            }
+                            else
+                            {
+                                logic.Formula.Message = encryptionFormula.Message;
+                            }
+                            return logic;
                         }
                     }
                 }
