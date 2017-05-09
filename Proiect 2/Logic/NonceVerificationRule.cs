@@ -37,7 +37,7 @@ namespace Proiect_2.Logic
                     {
                         var said = formula2.Formula as Said;
                         if (freshFormula.Message.Equals(said.Message, StringComparison.InvariantCultureIgnoreCase) &&//The encrypted message key and the shared key between Agent1 and Agent2 are identical
-                            formula1.Agent1.Equals(formula2.Agent1)) //The first Agents are the same
+                            Equals(formula1.Agent1, formula2.Agent1)) //The first Agents are the same
                         {
                             return new Believe
                             {

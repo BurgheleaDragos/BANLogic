@@ -26,19 +26,18 @@ namespace Proiect_2
 
         private void buttonRead_Click(object sender, EventArgs e)
         {
-            //  textBoxRead.Text = reader.ReadData();
+            //            textBoxRead.Text = reader.ReadData();
             //            reader.Data = textBoxRead.Text + "_test";
 
             //            textBoxWrite.Text = reader.Data;
-            // reader.WriteData();
+            //            reader.WriteData();
 
             //            NSSKAlgorithm();
 
-            // KerberosProtocol();
-            NSSKProtocol();
+            KerberosProtocol();
 
-//            testReceiveRule();
-//            testFreshRule();
+            testReceiveRule();
+            testFreshRule();
         }
 
         private void NSSKAlgorithm()
@@ -339,225 +338,13 @@ namespace Proiect_2
             BanLogic.ProtocolStepsKnowledge();
 
             var readerStrBuilder = new StringBuilder();
+            readerStrBuilder.AppendLine("Initial Assumptions: ");
             foreach (var initialAssumption in BanLogic.InitialAssumptions)
             {
                 readerStrBuilder.AppendLine(initialAssumption.ToString());
             }
-            foreach (var protocolStep in BanLogic.ProtocolSteps)
-            {
-                readerStrBuilder.AppendLine(protocolStep.ToString());
-            }
-            textBoxRead.Text = readerStrBuilder.ToString();
-            var strBuilder = new StringBuilder();
-            foreach (var logic in BanLogic.CurrentKnowledge)
-            {
-                strBuilder.AppendLine(logic.ToString());
-            }
-            textBoxWrite.Text = strBuilder.ToString();
-        }
-
-
-        private void NSSKProtocol()
-        {
-            var AgentA = new Agent();
-            AgentA.Name = "A";
-            var AgentB = new Agent();
-            AgentB.Name = "B";
-            var AgentS = new Agent();
-            AgentS.Name = "S";
-
-
-            #region A bel A <Kas>S
-
-            var i1 = new Believe();
-            i1.Agent1 = AgentA;
-            i1.Formula = new SharedKey();
-            ((SharedKey)i1.Formula).Agent1 = new Agent() { Name = "A" };
-            ((SharedKey)i1.Formula).Agent2 = AgentS;
-            ((SharedKey)i1.Formula).Key = "Kas";
-            BanLogic.InitialAssumptions.Add(i1);
-
-            #endregion
-
-            #region B bel B <Kbs>S
-
-            var i2 = new Believe();
-            i2.Agent1 = AgentB;
-            i2.Formula = new SharedKey();
-            ((SharedKey)i2.Formula).Agent1 = new Agent() { Name = "B" };
-            ((SharedKey)i2.Formula).Agent2 = AgentS;
-            ((SharedKey)i2.Formula).Key = "Kbs";
-            BanLogic.InitialAssumptions.Add(i2);
-
-            #endregion
-
-            #region A bel S controls A<K>B
-
-            var i3 = new Believe();
-            i3.Agent1 = AgentA;
-            var i4 = new Controls();
-            i4.Agent1 = AgentS;
-            var i5 = new SharedKey();
-            i3.Formula = i4;
-            i4.Formula = i5;
-            i5.Agent1 = AgentA;
-            i5.Agent2 = AgentB;
-            i5.Key = "K";
-            BanLogic.InitialAssumptions.Add(i3);
-
-            #endregion
-
-            #region B bel S controls A<K>B
-
-            var i6 = new Believe();
-            i6.Agent1 = AgentB;
-            var i7 = new Controls();
-            i7.Agent1 = AgentS;
-            var i10 = new SharedKey();
-            i6.Formula = i7;
-            i7.Formula = i10;
-            i10.Agent1 = AgentA;
-            i10.Agent2 = AgentB;
-            i10.Key = "K";
-            BanLogic.InitialAssumptions.Add(i6);
-
-            #endregion
-
-            #region A bel fresh(Na)
-
-            var i11 = new Believe();
-            i11.Agent1 = AgentA;
-            i11.Formula = new Fresh();
-            ((Fresh)i11.Formula).Message = "Na";
-            BanLogic.InitialAssumptions.Add(i11);
-
-            #endregion
-
-
-            #region B bel fresh(Nb)
-
-            var i12 = new Believe();
-            i12.Agent1 = AgentB;
-            i12.Formula = new Fresh();
-            ((Fresh)i12.Formula).Message = "Nb";
-            BanLogic.InitialAssumptions.Add(i12);
-
-            #endregion
-
-
-            #region A bel S controls fresh(A,K>B)
-
-            var i13 = new Believe();
-            i13.Agent1 = AgentA;
-            var i14 = new Controls();
-            i14.Agent1 = AgentS;
-            var i15 = new Fresh();
-            i13.Formula = i14;
-            i14.Formula = i15;
-            i15.Formula = new SharedKey();
-            ((SharedKey)i15.Formula).Key = "K";
-            ((SharedKey)i15.Formula).Agent1 = AgentA;
-            ((SharedKey)i15.Formula).Agent1 = AgentB;
-            BanLogic.InitialAssumptions.Add(i13);
-
-            #endregion
-
-            #region A sees{Na, a<Kab>B, fresh(Kab),{A<Kab>B}Kbs}KAs from S
-
-            var f1 = new Sees();
-            f1.Agent1 = AgentA;
-            f1.Formula = new From();
-            ((From)f1.Formula).Agent = AgentS;
-            var f2 = new Encryption();
-            ((From)f1.Formula).Formula = f2;
-            f2.Formula = new Concatenate();
-            var p1 = new BaseLogic();
-            p1.Message = "Na";
-            ((Concatenate)f2.Formula).Formulas.Add(p1);
-            var p2 = new SharedKey();
-            p2.Key = "Kab";
-            p2.Agent1 = AgentA;
-            p2.Agent2 = AgentB;
-            ((Concatenate)f2.Formula).Formulas.Add(p2);
-            var p3 = new Fresh { Message = "Kab" };
-            ((Concatenate)f2.Formula).Formulas.Add(p3);
-            var p4 = new Encryption();
-            p4.Key = "Kbs";
-            p4.Formula = new SharedKey();
-            ((SharedKey)p4.Formula).Key = "Kab";
-            ((SharedKey)p4.Formula).Agent1 = AgentA;
-            ((SharedKey)p4.Formula).Agent2 = AgentB;
-            ((Concatenate)f2.Formula).Formulas.Add(p4);
-            BanLogic.ProtocolSteps.Add(f2);
-
-            #endregion // pas1 NSSK
-
-            #region B sees {A<Kab>B}Kbs from S
-
-            var f3 = new Sees();
-            f3.Agent1 = AgentB;
-            f3.Formula = new From();
-            ((From)f3.Formula).Formula = new Encryption();
-            ((From)f3.Formula).Agent = AgentS;
-            ((Encryption)((From)f3.Formula).Formula).Formula = new SharedKey();
-            ((Encryption)((From)f3.Formula).Formula).Key = "Kbs";
-            ((SharedKey)((Encryption)((From)f3.Formula).Formula).Formula).Agent1 = AgentA;
-            ((SharedKey)((Encryption)((From)f3.Formula).Formula).Formula).Agent2 = AgentB;
-            ((SharedKey)((Encryption)((From)f3.Formula).Formula).Formula).Key = "Kab";
-            BanLogic.ProtocolSteps.Add(f3);
-
-            #endregion // pas2 NSSK
-
-            #region A sees {Nb,A<Kab>B}Kab from B
-
-            var f4 = new Sees();
-            f4.Agent1 = AgentA;
-            f4.Formula = new From();
-            ((From)f4.Formula).Formula = new Encryption();
-            ((From)f4.Formula).Agent = AgentB;
-            ((Encryption)((From)f4.Formula).Formula).Key = "Kab";
-            ((Encryption)((From)f4.Formula).Formula).Formula = new Concatenate();
-            var par1 = new BaseLogic();
-            par1.Message = "Nb";
-            ((Concatenate)((Encryption)((From)f4.Formula).Formula).Formula).Formulas.Add(par1);
-            var par2 = new SharedKey();
-            par2.Key = "Kbs";
-            par2.Agent1 = AgentA;
-            par2.Agent2 = AgentB;
-            par2.Key = "Kab";
-            ((Concatenate)((Encryption)((From)f4.Formula).Formula).Formula).Formulas.Add(par2);
-            BanLogic.ProtocolSteps.Add(f4); //pas3 NSSK
-
-            #endregion
-
-            #region B sees {Nb,A<Kab>B}Kab from A
-
-            var f5 = new Sees();
-            f5.Agent1 = AgentB;
-            f5.Formula = new From();
-            ((From)f5.Formula).Formula = new Encryption();
-            ((From)f5.Formula).Agent = AgentA;
-            ((Encryption)((From)f5.Formula).Formula).Key = "Kab";
-            ((Encryption)((From)f5.Formula).Formula).Formula = new Concatenate();
-            var param1 = new BaseLogic();
-            param1.Message = "Nb";
-            ((Concatenate)((Encryption)((From)f5.Formula).Formula).Formula).Formulas.Add(param1);
-            var param2 = new SharedKey();
-            param2.Key = "Kbs";
-            param2.Agent1 = AgentA;
-            param2.Agent2 = AgentB;
-            param2.Key = "Kab";
-            ((Concatenate)((Encryption)((From)f5.Formula).Formula).Formula).Formulas.Add(param2);
-            BanLogic.ProtocolSteps.Add(f5); //pas4 NSSK
-
-            #endregion
-            BanLogic.ProtocolStepsKnowledge();
-
-            var readerStrBuilder = new StringBuilder();
-            foreach (var initialAssumption in BanLogic.InitialAssumptions)
-            {
-                readerStrBuilder.AppendLine(initialAssumption.ToString());
-            }
+            readerStrBuilder.AppendLine();
+            readerStrBuilder.AppendLine("Protocol steps: ");
             foreach (var protocolStep in BanLogic.ProtocolSteps)
             {
                 readerStrBuilder.AppendLine(protocolStep.ToString());
