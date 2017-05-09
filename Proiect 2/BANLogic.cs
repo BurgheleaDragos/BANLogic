@@ -9,7 +9,6 @@ namespace Proiect_2
         public List<BaseLogic> InitialAssumptions;
         public List<BaseLogic> ProtocolSteps;
         public List<BaseLogic> CurrentKnowledge;
-        public Queue<BaseLogic> CurrentKnowledgeQueue;
         public BanLogic()
         {
             InitialAssumptions = new List<BaseLogic>();

@@ -24,6 +24,24 @@ namespace Proiect_2.Logic
                 var formula1 = Formula1 as Believe;
                 var formula2 = Formula2 as Believe;
 
+                if (formula1 != null &&
+                    formula1.Formula.GetType() == typeof(Said))
+                {
+                    var saidFormula = formula1.Formula as Said;
+                    if(saidFormula.Formula.GetType() == typeof(Concatenate))
+                    if (formula2 != null &&
+                        formula2.Formula.GetType() == typeof(Fresh))
+                    {
+                        var freshFormula = formula2.Formula as Fresh;
+                        if (saidFormula?.Formula.Message != null && 
+                            saidFormula.Formula.Message.Equals(freshFormula.Formula.Message,
+                                StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            return null;
+                        }
+                    }
+                }
+
                 return null;
 
                 /*
