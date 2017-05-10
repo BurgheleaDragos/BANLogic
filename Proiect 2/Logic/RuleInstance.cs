@@ -10,6 +10,12 @@ namespace Proiect_2.Logic
             {
                 case "AuthenticationRule":
                     return new AuthenticationRule(formula1).Result;
+                case "BelieveConcatenation":
+                    return new BelieveConcatenation(formula1, formula2).Result;
+                case "BelieveDecomposition":
+                    return new BelieveDecomposition(formula1).Result;
+                case "BelieveSaidConcatenation":
+                    return new BelieveSaidConcatenation(formula1).Result;
                 case "ConcatenateRule":
                     return new ConcatenateRule(formula1).Result;
                 case "ConfirmationKeyRule":
