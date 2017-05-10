@@ -37,9 +37,10 @@ namespace Proiect_2.Logic
                         formula2.Formula.GetType() == typeof(PublicEncryption))
                     {
                         var encryptedFormula = formula2.Formula as PublicEncryption;
-                        if (encryptedFormula.Key.Equals(encryptedFormula.Key) &&
-                            Equals(formula1.Agent1, formula2.Agent1) &&
-                            encryptedFormula.Agent1.Equals(formula1.Agent1))
+                        var encryptedSecret = formula1.Formula as EncryptedSecret;
+                        if (encryptedSecret != null && (encryptedFormula != null && (encryptedFormula.Key.Equals(encryptedSecret.Key) &&
+                                                                                     Equals(formula1.Agent1, formula2.Agent1) &&
+                                                                                     encryptedFormula.Agent1.Equals(formula1.Agent1))))
                         {
                             return new Believe
                             {
@@ -47,7 +48,7 @@ namespace Proiect_2.Logic
                                 Formula = new Said
                                 {
                                     Agent1 = encryptedFormula.Agent1,
-                                    Formula = encryptedFormula.Key
+                                    Message = encryptedSecret.Message
                                 }
                             };
                         }

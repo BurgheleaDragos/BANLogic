@@ -25,8 +25,8 @@ namespace Proiect_2.Logic
             {
                 Believe formula1 = Formula1 as Believe;
 
-                if (formula1 != null && //First formula must be of type Receives
-                    formula1.Formula.GetType() == typeof(Fresh))//The second parameter must be an encrypted value with key K
+                if (formula1 != null && 
+                    formula1.Formula.GetType() == typeof(Fresh))
                 {
                     //                    var saidFormula = formula1.Formula as Fresh;
 

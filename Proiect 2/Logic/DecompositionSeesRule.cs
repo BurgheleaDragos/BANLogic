@@ -1,21 +1,20 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Proiect_2.Syntax;
 
 namespace Proiect_2.Logic
 {
-    public class BelieveSaidConcatenation
+    public class DecompositionSeesRule
     {
         public BaseLogic Formula1 { get; set; }
         public List<BaseLogic> Result => RuleLogic(Formula1);
-        public BelieveSaidConcatenation() { }
+        public DecompositionSeesRule() { }
         public static List<BaseLogic> GetResult(BaseLogic formula1)
         {
             return RuleLogic(formula1);
         }
 
-        public BelieveSaidConcatenation(BaseLogic formula1)
+        public DecompositionSeesRule(BaseLogic formula1)
         {
             Formula1 = formula1;
         }
@@ -24,37 +23,33 @@ namespace Proiect_2.Logic
         {
             try
             {
-                var formula1 = _formula1 as Believe;
+                var formula1 = _formula1 as Sees;
 
                 if (formula1 != null &&
-                    formula1.Formula.GetType() == typeof(Believe))
+                    formula1.Formula.GetType() == typeof(Concatenate))
                 {
-                    var formula2 = formula1.Formula as Believe;
+                    var formula2 = formula1.Formula as Concatenate;
                     if (formula2 != null &&
-                        formula2.Formula.GetType() == typeof(Concatenate))
+                        formula2.GetType() == typeof(Concatenate))
                     {
-                        var concatenate = formula2.Formula as Concatenate;
-                        if (concatenate == null)
-                        {
-                            return null;
-                        }
+
                         var ruleLogic = new List<BaseLogic>();
-                        foreach (var formula in concatenate.Formulas)
+                        foreach (var formula in formula2.Formulas)
                         {
-                            ruleLogic.Add(new Believe()
+                            ruleLogic.Add(new Sees()
                             {
                                 Agent1 = formula1.Agent1,
-                                Formula = new Believe()
-                                {
-                                    Agent1 = formula2.Agent1,
-                                    Formula = formula
-                                }
+                                Formula = formula
+
                             });
                         }
                         return ruleLogic;
                     }
+                    
                 }
+                
             }
+
             catch (Exception e)
             {
                 Console.WriteLine(e);

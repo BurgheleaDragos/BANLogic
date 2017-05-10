@@ -33,18 +33,21 @@ namespace Proiect_2.Logic
                     if (formula2 != null &&
                         formula2.Formula.GetType() == typeof(SharedSecret))
                     {
-                        var encryptedFormula = formula2.Formula as SharedSecret;
-                        if (encryptedFormula.Key.Equals(encryptedFormula.Key, StringComparison.InvariantCultureIgnoreCase) &&
-                            Equals(formula1.Agent1, formula2.Agent1) &&
-                            encryptedFormula.Agent1.Equals(formula1.Agent1))
+                        var sharedSecretFormula = formula2.Formula as SharedSecret;
+                        var sharedSecretFormula2 = formula1.Formula as EncryptedSecret;
+
+                        if (sharedSecretFormula2 != null && sharedSecretFormula != null &&
+                            sharedSecretFormula.Key.Equals(sharedSecretFormula2.Key, StringComparison.InvariantCultureIgnoreCase) &&
+                            formula1.Agent1.Equals(formula2.Agent1) &&
+                            sharedSecretFormula.Agent2.Equals(formula1.Agent1))
                         {
                             return new Believe
                             {
                                 Agent1 = formula1.Agent1,
                                 Formula = new Said
                                 {
-                                    Agent1 = encryptedFormula.Agent2,
-                                    Message = encryptedFormula.Key
+                                    Agent1 = sharedSecretFormula.Agent1,
+                                    Message = sharedSecretFormula.Key
                                 }
                             };
                         }

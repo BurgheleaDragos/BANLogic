@@ -28,16 +28,17 @@ namespace Proiect_2.Logic
                 Believe formula2 = Formula2 as Believe;
 
                 if (formula1 != null && //First formula must be of type Believe
-                    formula1.Formula.GetType() == typeof(Fresh))//The second parameter must be an encrypted value with key K
+                    formula1.Formula.GetType() == typeof(Fresh))
                 {
                     var freshFormula = formula1.Formula as Fresh;
 
                     if (formula2 != null && //Second formula must be of type Believes
-                        formula2.Formula.GetType() == typeof(Said))//The second parameter must be a shared key K
+                        formula2.Formula.GetType() == typeof(Said))
                     {
                         var said = formula2.Formula as Said;
-                        if (freshFormula.Message.Equals(said.Message, StringComparison.InvariantCultureIgnoreCase) &&//The encrypted message key and the shared key between Agent1 and Agent2 are identical
-                            Equals(formula1.Agent1, formula2.Agent1)) //The first Agents are the same
+                        if (said != null && (freshFormula != null && 
+                            (freshFormula.Message.Equals(said.Message, StringComparison.InvariantCultureIgnoreCase) &&
+                              Equals(formula1.Agent1, formula2.Agent1)))) //The first Agents are the same
                         {
                             return new Believe
                             {

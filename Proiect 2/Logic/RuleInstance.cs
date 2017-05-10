@@ -28,6 +28,8 @@ namespace Proiect_2.Logic
                     return new ReceiveRule(formula1, formula2).Result;
                 case "ReceiveSecretRule":
                     return new ReceiveSecretRule(formula1, formula2).Result;
+                case "DecompositionSeesRule":
+                    return new DecompositionSeesRule(formula1).Result;
             }
             return null;
         }

@@ -62,6 +62,7 @@
     <Compile Include="Logic\BelieveSaidConcatenation.cs" />
     <Compile Include="Logic\ConcatenateRule.cs" />
     <Compile Include="Logic\ConfirmationKeyRule.cs" />
+    <Compile Include="Logic\DecompositionSeesRule.cs" />
     <Compile Include="Logic\FreshInjectRule.cs" />
     <Compile Include="Logic\FreshRule.cs" />
     <Compile Include="Logic\IRule.cs" />

@@ -32,8 +32,8 @@ namespace Proiect_2.Logic
                 {
                     var encryptedFormula1 = formula.Formula as Believe;
                     var encryptedFormula2 = encryptedFormula1.Formula as SharedKey;
-                    if (Equals(formula.Agent1, encryptedFormula2.Agent1) &&
-                        Equals(encryptedFormula1.Agent1, encryptedFormula2.Agent2)) //The  Agents are the same 
+                    if (encryptedFormula2 != null && (Equals(formula.Agent1, encryptedFormula2.Agent1) &&
+                      Equals(encryptedFormula1.Agent1, encryptedFormula2.Agent2))) //The  Agents are the same 
                     {
                         return true;
                     }

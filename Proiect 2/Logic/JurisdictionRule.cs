@@ -36,9 +36,10 @@ namespace Proiect_2.Logic
                         formula2.Formula.GetType() == typeof(Believe))
                     {
                         var believeFormula = formula2.Formula as Believe;
-                        if (formula1.Agent1.Equals(formula2.Agent1) &&
-                            controlFormula.Agent1.Equals(believeFormula.Agent1) &&
-                            controlFormula.Message.Equals(believeFormula.Message, StringComparison.InvariantCultureIgnoreCase))
+                        if (believeFormula != null && (controlFormula != null && 
+                                     (formula1.Agent1.Equals(formula2.Agent1) &&
+                          controlFormula.Agent1.Equals(believeFormula.Agent1) &&
+                          controlFormula.Message.Equals(believeFormula.Message, StringComparison.InvariantCultureIgnoreCase))))
                         {
                             return new Believe
                             {
