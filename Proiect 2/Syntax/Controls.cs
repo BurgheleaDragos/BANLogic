@@ -12,5 +12,13 @@ namespace Proiect_2.Syntax
         {
             return $"{Agent1} controls {Formula}";
         }
+        public override bool Equals(object obj)
+        {
+            var controls = obj as Controls;
+            if (controls == null) return false;
+            return Agent1!=null && Agent1.Equals(controls.Agent1) &&
+                (Message != null && controls.Message == Message ||
+                   controls.Formula != null && controls.Formula.Equals(Formula));
+        }
     }
 }

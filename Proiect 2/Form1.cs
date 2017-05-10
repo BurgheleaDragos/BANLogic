@@ -19,6 +19,9 @@ namespace Proiect_2
             var kerberos = new KerberosProtocol();
             BanLogic = new BanLogic(kerberos.InitialAssumptions, kerberos.ProtocolSteps, kerberos.Knowledge);
             BanLogic.ProtocolStepsKnowledge();
+
+            textBoxRead.Text = "";
+            textBoxRead.Text = "Kerberos Protocol";
             WriteData();
         }
 
@@ -29,6 +32,8 @@ namespace Proiect_2
             BanLogic = new BanLogic(nssk.InitialAssumptions, nssk.ProtocolSteps, nssk.Knowledge);
 
             BanLogic.ProtocolStepsKnowledge();
+            textBoxRead.Text = "";
+            textBoxRead.Text = "NSSK Protocol";
             WriteData();
         }
         private void AndrewSecureRpcProtocol()
@@ -37,14 +42,17 @@ namespace Proiect_2
             BanLogic = new BanLogic(andrewSecureRpcProtocol.InitialAssumptions, andrewSecureRpcProtocol.ProtocolSteps, andrewSecureRpcProtocol.Knowledge);
 
             BanLogic.ProtocolStepsKnowledge();
+
+            textBoxRead.Text = "";
+            textBoxRead.Text = "Andrew Secure RPC Protocol";
             WriteData();
         }
 
         private void WriteData()
         {
-            textBoxRead.Text = "";
             textBoxWrite.Text = "";
             var readerStrBuilder = new StringBuilder();
+            readerStrBuilder.AppendLine(textBoxRead.Text);
             readerStrBuilder.AppendLine("Initial Assumptions: ");
             foreach (var initialAssumption in BanLogic.InitialAssumptions)
             {

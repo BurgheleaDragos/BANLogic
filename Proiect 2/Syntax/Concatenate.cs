@@ -6,12 +6,10 @@ namespace Proiect_2.Syntax
     public class Concatenate : BaseLogic
     {
         public List<BaseLogic> Formulas { get; set; }
-
         public Concatenate()
         {
             Formulas = new List<BaseLogic>();
         }
-
         public override string ToString()
         {
             var str = new StringBuilder();
@@ -26,11 +24,10 @@ namespace Proiect_2.Syntax
 
         public override bool Equals(object obj)
         {
-            var said = obj as Concatenate;
-            if (said == null) return false;
-            if (said.Message == Message &&
-                (said.Formulas != null && Formulas != null && said.Formulas.Equals(Formulas))) return true;
-            return false;
+            var concatenate = obj as Concatenate;
+            if (concatenate == null) return false;
+            return Message != null && concatenate.Message == Message ||
+                   concatenate.Formulas != null && concatenate.Formulas.Equals(Formulas);
         }
     }
 }
