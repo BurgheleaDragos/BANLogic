@@ -8,6 +8,13 @@ namespace Proiect_2.Syntax
         {
             return Message;
         }
+
+//        public override bool Equals(object obj)
+//        {
+//            var bl = obj as BaseLogic;
+//            if (bl == null) return false;
+//            return Message == bl.Message;
+//        }
     }
 
 }

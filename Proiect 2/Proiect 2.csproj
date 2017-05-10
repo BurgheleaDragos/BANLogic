@@ -56,6 +56,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Protocols\AndrewSecureRpcProtocol.cs" />
+    <Compile Include="Protocols\IProtocol.cs" />
+    <Compile Include="Protocols\KerberosProtocol.cs" />
     <Compile Include="Logic\AuthenticationRule.cs" />
     <Compile Include="Logic\BelieveConcatenation.cs" />
     <Compile Include="Logic\BelieveDecomposition.cs" />
@@ -75,6 +78,7 @@
     <Compile Include="Logic\SelectionRuleBBSelect.cs" />
     <Compile Include="Logic\SelectionRuleBSSelect.cs" />
     <Compile Include="Logic\SelectionRuleRSelect.cs" />
+    <Compile Include="Protocols\NSSKProtocol.cs" />
     <Compile Include="Syntax\BaseLogic.cs" />
     <Compile Include="Syntax\Believe.cs" />
     <Compile Include="Syntax\Concatenate.cs" />
@@ -85,7 +89,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reader.cs" />
-    <Compile Include="Syntax\From.cs" />
     <Compile Include="Syntax\Jurisdiction.cs" />
     <Compile Include="Syntax\OnceSaid.cs" />
     <Compile Include="Syntax\PublicEncryption.cs" />

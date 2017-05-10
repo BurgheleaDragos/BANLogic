@@ -13,8 +13,8 @@ namespace Proiect_2.Syntax
         {
             var said = obj as Fresh;
             if (said == null) return false;
-            return said.Message == Message &&
-                   (said.Formula != null && Formula != null && said.Formula.Equals(Formula));
+            return Message != null && said.Message == Message ||
+                   (said.Formula != null && said.Formula.Equals(Formula));
         }
     }
 }

@@ -29,8 +29,8 @@ namespace Proiect_2.Logic
                     formula1.Formula.GetType() == typeof(Said))
                 {
                     var formula2 = formula1.Formula as Said;
-                    if (formula2 != null &&
-                        formula2.Formula.GetType() == typeof(Concatenate))
+                    if ((formula2?.Formula != null && 
+                        formula2.Formula.GetType() == typeof(Concatenate)))
                     {
                         var concatenate = formula2.Formula as Concatenate;
                         if (concatenate == null)
